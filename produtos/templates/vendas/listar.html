@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Vendas{% endblock %}
+{% block content %}
+<a href="{% url 'criar_venda' %}" class="btn btn-primary mb-3">Nova Venda</a>
+<form method="get" class="row mb-3">
+    <div class="col">
+        <select name="cliente" class="form-select">
+            <option value="">Todos os clientes</option>
+            {% for c in clientes %}
+                <option value="{{ c.id }}">{{ c.nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <input type="date" name="data_inicio" class="form-control" placeholder="Data início">
+    </div>
+    <div class="col">
+        <input type="date" name="data_fim" class="form-control" placeholder="Data fim">
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-secondary">Filtrar</button>
+    </div>
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr><th>Cliente</th><th>Produto</th><th>Quantidade</th><th>Data</th><th>Total</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+        {% for v in vendas %}
+        <tr>
+            <td>{{ v.cliente.nome }}</td>
+            <td>{{ v.produto.nome }}</td>
+            <td>{{ v.quantidade }}</td>
+            <td>{{ v.data_venda }}</td>
+            <td>R$ {{ v.valor_total|floatformat:2 }}</td>
+            <td>
+                <a href="{% url 'editar_venda' v.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'remover_venda' v.id %}" class="btn btn-sm btn-danger">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

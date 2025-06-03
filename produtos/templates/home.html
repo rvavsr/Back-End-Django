@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Sistema de Vendas{% endblock %}
+
+{% block content %}
+  <div class="d-flex flex-column gap-3">
+    <a href="{% url 'listar_vendas' %}" class="btn btn-primary btn-lg">Lista de Vendas</a>
+    <a href="{% url 'listar_clientes' %}" class="btn btn-secondary btn-lg">Lista de Clientes</a>
+    <a href="{% url 'produto_list' %}" class="btn btn-success btn-lg">Lista de Produtos</a>
+  </div>
+{% endblock %}
